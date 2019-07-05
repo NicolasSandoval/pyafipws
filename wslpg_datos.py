@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf8 -*-
 from decimal import Decimal
 
 TIPOS_OP = {1: 'Compraventa de granos', 2: 'Consignación de granos'}

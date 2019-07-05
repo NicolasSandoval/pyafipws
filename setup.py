@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: latin-1 -*-
-
 # Para hacer el ejecutable:
 #       python setup.py py2exe
 #
