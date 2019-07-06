@@ -8,7 +8,7 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 # for more details.
 
-"MÛdulo para manejo de archivos XML simil Facturador-Plus (RCEL)"
+"M√≥dulo para manejo de archivos XML simil Facturador-Plus (RCEL)"
 
 __author__ = "Mariano Reingart (reingart@gmail.com)"
 __copyright__ = "Copyright (C) 2010 Mariano Reingart"
@@ -233,7 +233,7 @@ MAP_TRIB = {
 }
 
 
-# Esqueleto XML b·sico simil facturador-plus
+# Esqueleto XML b√°sico simil facturador-plus
 XML_BASE = """\
 <?xml version="1.0" encoding="UTF-8"?>
 <comprobantes/>
@@ -333,7 +333,7 @@ def serializar(regs):
     return xml.as_xml()
 
 
-# pruebas b·sicas
+# pruebas b√°sicas
 if __name__ == '__main__':
     regs = leer("prueba_entrada.xml")
     regs[0]['cae'] = '1' * 15

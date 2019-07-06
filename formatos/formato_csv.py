@@ -8,7 +8,7 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 # for more details.
 
-"Módulo para manejo de archivos CSV (planillas de cálculo)"
+"MÃ³dulo para manejo de archivos CSV (planillas de cÃ¡lculo)"
 
 __author__ = "Mariano Reingart (reingart@gmail.com)"
 __copyright__ = "Copyright (C) 2010 Mariano Reingart"
@@ -191,7 +191,7 @@ def desaplanar(filas):
         for det in reg['detalles'][::-1]:
             if any(det.values()):               # algun campo tiene dato termina
                 break
-            del reg['detalles'][-1]             # sino, borro último elemento
+            del reg['detalles'][-1]             # sino, borro Ãºltimo elemento
 
         reg['tributos'] = [{
             'tributo_id': dic.pop('tributo_id_%s' % li),
@@ -259,7 +259,7 @@ def escribir(filas, fn="salida.csv", delimiter=";"):
         wb.save(filename=fn)
 
 
-# pruebas básicas
+# pruebas bÃ¡sicas
 if __name__ == '__main__':
     ##import pdb; pdb.set_trace()
     filas = leer("facturas-wsfev1-bis.csv")

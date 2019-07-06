@@ -18,7 +18,7 @@ import os
 from decimal import Decimal
 import datetime
 import csv
-"Almacenamiento de duplicados electrónicos RG1361/02 y RG1579/03 AFIP"
+"Almacenamiento de duplicados electrÃ³nicos RG1361/02 y RG1579/03 AFIP"
 
 __author__ = "Mariano Reingart (reingart@gmail.com)"
 __copyright__ = "Copyright (C) 2009-2015 Mariano Reingart"
@@ -27,21 +27,21 @@ __version__ = "1.22d"
 
 LICENCIA = """
 sired.py: Generador de archivos ventas para SIRED/SIAP RG1361/02 RG1579/03
-(Sistema Resúmen Electrónico de Datos / Almacenamiento de Duplicados)
+(Sistema ResÃºmen ElectrÃ³nico de Datos / Almacenamiento de Duplicados)
 Copyright (C) 2009-2015 Mariano Reingart reingart@gmail.com
 
 Este progarma es software libre, se entrega ABSOLUTAMENTE SIN GARANTIA
 y es bienvenido a redistribuirlo bajo la licencia GPLv3.
 
-Para información adicional sobre garantía, soporte técnico comercial
-e incorporación/distribución en programas propietarios ver PyAfipWs:
+Para informaciÃ³n adicional sobre garantÃ­a, soporte tÃ©cnico comercial
+e incorporaciÃ³n/distribuciÃ³n en programas propietarios ver PyAfipWs:
 http://www.sistemasagiles.com.ar/trac/wiki/PyAfipWs
 """
 
 
 CUIT = '20267565393'
 
-# ESPECIFICACIONES TECNICAS - ANEXO II RESOLUCION GENERAL N°1361
+# ESPECIFICACIONES TECNICAS - ANEXO II RESOLUCION GENERAL NÂ°1361
 # http://www.afip.gov.ar/afip/resol136102_Anexo_II.html
 
 categorias = {"responsable inscripto": "01",  # IVA Responsable Inscripto
@@ -54,8 +54,8 @@ categorias = {"responsable inscripto": "01",  # IVA Responsable Inscripto
               "no categorizado": "07",  # Sujeto no Categorizado
               "importador": "08",  # Importador del Exterior
               "exterior": "09",  # Cliente del Exterior
-              "liberado": "10",  # IVA Liberado Ley Nº 19.640
-              "responsable inscripto - agente de percepción": "11",  # IVA Responsable Inscripto - Agente de Percepcion
+              "liberado": "10",  # IVA Liberado Ley NÂº 19.640
+              "responsable inscripto - agente de percepciÃ³n": "11",  # IVA Responsable Inscripto - Agente de Percepcion
               }
 
 codigos_operacion = {
@@ -294,7 +294,7 @@ def generar_detalle(items):
 
     out = open("DETALLE_%s.txt" % periodo, "w")
 
-    # recorro las facturas y detalles de artículos vendidos:
+    # recorro las facturas y detalles de artÃ­culos vendidos:
     for item in items:
         for it in item.get('detalles', [{}]):
             vals = format_as_dict(DETALLE)
@@ -305,7 +305,7 @@ def generar_detalle(items):
             vals['cbte_nro_reg'] = item['cbt_numero']  # no hay varias hojas
             vals['ctl_fiscal'] = item.get('ctl_fiscal', ' ')  # C para controlador
             vals['anulacion'] = item.get('anulacion', ' ')
-            # datos del artículo:
+            # datos del artÃ­culo:
             vals['qty'] = it.get('qty', '1')  # cantidad
             vals['pro_umed'] = it.get('umed', '07')  # unidad de medida
             vals['pro_precio_uni'] = it.get('precio', item['imp_neto'])
@@ -314,7 +314,7 @@ def generar_detalle(items):
             vals['imp_total'] = it.get('importe', '0.00')
             # iva
             if 'iva_id' in it and it['iva_id']:
-                # mapear alicuota de iva según código usado en MTX
+                # mapear alicuota de iva segÃºn cÃ³digo usado en MTX
                 iva_id = int(it['iva_id'])
                 if iva_id in (1, 2):
                     alicuota = None
@@ -332,7 +332,7 @@ def generar_detalle(items):
                     vals['gravado'] = 'E'
                 else:
                     vals['gravado'] = 'G'
-            # diseño libre: código de barras y descripción:
+            # diseÃ±o libre: cÃ³digo de barras y descripciÃ³n:
             vals['codigo'] = it.get('codigo', '')
             vals['ds'] = it.get('ds', '')
             s = escribir(vals, DETALLE)
@@ -359,7 +359,7 @@ def generar_ventas(items):
             vals = format_as_dict(VENTAS_TIPO1)
             # datos generales de la factura:
             vals['tipo_reg'] = '1'
-            # copio los campos que no varían para las distintas alicuotas de IVA
+            # copio los campos que no varÃ­an para las distintas alicuotas de IVA
             for k, l, t in VENTAS_TIPO1[1:10] + VENTAS_TIPO1[21:30]:
                 vals[k] = item.get(k)
             vals['fecha_anulacion'] = ''
@@ -372,9 +372,9 @@ def generar_ventas(items):
             if vals['imp_moneda_id'] is None:
                 vals['imp_moneda_id'] = 'PES'
                 vals['imp_moneda_ctz'] = '1.000'
-            # subtotales por alícuota de IVA
+            # subtotales por alÃ­cuota de IVA
             if 'iva_id' in iva:
-                # mapear alicuota de iva según código usado en MTX
+                # mapear alicuota de iva segÃºn cÃ³digo usado en MTX
                 iva_id = int(iva['iva_id'])
                 if iva_id == 1:
                     vals['imp_tot_conc'] = iva['base_imp']
@@ -421,7 +421,7 @@ def generar_ventas(items):
 
 
 class SIRED():
-    "Componente para Sistema Resúmen Electrónico de Datos RG1361/02 RG1579/03"
+    "Componente para Sistema ResÃºmen ElectrÃ³nico de Datos RG1361/02 RG1579/03"
 
     _public_methods_ = ['CrearBD',
                         'CrearFactura',
@@ -587,7 +587,7 @@ class SIRED():
         return leer(self.db, **kwargs)
 
 
-# busco el directorio de instalación (global para que no cambie si usan otra dll)
+# busco el directorio de instalaciÃ³n (global para que no cambie si usan otra dll)
 INSTALL_DIR = SIRED.InstallDir = get_install_dir()
 
 if __name__ == '__main__':
@@ -625,7 +625,7 @@ if __name__ == '__main__':
             imp_subtotal = "100.00"
             fecha_cbte = fecha
             fecha_venc_pago = fecha
-            # Fechas del período del servicio facturado (solo si concepto = 1?)
+            # Fechas del perÃ­odo del servicio facturado (solo si concepto = 1?)
             fecha_serv_desde = fecha
             fecha_serv_hasta = fecha
             moneda_id = 'PES'
@@ -688,7 +688,7 @@ if __name__ == '__main__':
             iva_id = 5
             imp_iva = 21.00
             importe = 121.00
-            despacho = 'Nº 123456'
+            despacho = 'NÂº 123456'
             sired.AgregarDetalleItem(u_mtx, cod_mtx, codigo, ds, qty, umed,
                                      precio, bonif, iva_id, imp_iva, importe, despacho)
 
@@ -833,7 +833,7 @@ if __name__ == '__main__':
                                 importe = round(float(importe.replace(",", ".")), 2)
                                 if not iva is None:
                                     iva = round(float(iva.replace(",", ".")), 2)
-                                # si el iva es incorrecto o no está, liquidar:
+                                # si el iva es incorrecto o no estÃ¡, liquidar:
                                 if not iva and iva_id > 3:
                                     # extraer IVA incluido factura B:
                                     if factura["tipo_cbte"] in (6, 7, 8):

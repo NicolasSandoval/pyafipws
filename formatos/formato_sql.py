@@ -8,7 +8,7 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 # for more details.
 
-"Módulo para manejo de archivos SQL"
+"MÃ³dulo para manejo de archivos SQL"
 
 __author__ = "Mariano Reingart (reingart@gmail.com)"
 __copyright__ = "Copyright (C) 2014 Mariano Reingart"

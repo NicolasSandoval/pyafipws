@@ -9,7 +9,7 @@
 # for more details.
 
 from .formato_txt import A, N, I, ENCABEZADO, DETALLE, TRIBUTO, IVA, CMP_ASOC, PERMISO, DATO
-"M骴ulo para manejo de Facturas Electr髇icas en tablas DBF (dBase, FoxPro, Clipper et.al.)"
+"M贸dulo para manejo de Facturas Electr贸nicas en tablas DBF (dBase, FoxPro, Clipper et.al.)"
 
 __author__ = "Mariano Reingart (reingart@gmail.com)"
 __copyright__ = "Copyright (C) 2011 Mariano Reingart"
@@ -34,7 +34,7 @@ if dbf and hasattr(dbf, "encoding"):
 
 # Formato de entrada/salida similar a SIAP RECE, con agregados
 
-# definici髇 del formato del archivo de intercambio:
+# definici贸n del formato del archivo de intercambio:
 
 
 # agrego identificadores unicos para relacionarlos con el encabezado
@@ -47,7 +47,7 @@ DATO = [('id', 15, N)] + DATO
 
 
 def definir_campos(formato):
-    "Procesar la definici髇 de campos para DBF seg鷑 el formato txt"
+    "Procesar la definici贸n de campos para DBF seg煤n el formato txt"
     claves, campos = [], []
     for fmt in formato:
         clave, longitud, tipo = fmt[0:3]
@@ -191,7 +191,7 @@ def escribir(regs, archivos=None, carpeta=None):
 
 
 def ayuda():
-    "Imprimir ayuda con las tablas DBF y definici髇 de campos"
+    "Imprimir ayuda con las tablas DBF y definici贸n de campos"
     print("=== Formato DBF: ===")
     tipos_registro = [
         ('Encabezado', ENCABEZADO),

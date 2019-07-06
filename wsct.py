@@ -8,9 +8,9 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 # for more details.
 
-"""M骴ulo para obtener c骴igo de autorizaci髇 electr髇ico CAE webservice
-WSCT de AFIP (Factura Electr髇ica Comprobantes de Turismo)
-Resoluci髇 Conjunta General 3971 y Resoluci髇 566/2016.
+"""M贸dulo para obtener c贸digo de autorizaci贸n electr贸nico CAE webservice
+WSCT de AFIP (Factura Electr贸nica Comprobantes de Turismo)
+Resoluci贸n Conjunta General 3971 y Resoluci贸n 566/2016.
 """
 
 __author__ = "Mariano Reingart <reingart@gmail.com>"
@@ -30,7 +30,7 @@ WSDL = "https://fwshomo.afip.gov.ar/wsct/CTService?wsdl"
 
 
 class WSCT(BaseWS):
-    "Interfaz para el WebService de Factura Electr髇ica Comprobantes Turismo"
+    "Interfaz para el WebService de Factura Electr贸nica Comprobantes Turismo"
     _public_methods_ = ['CrearFactura', 'EstablecerCampoFactura', 'AgregarIva', 'AgregarItem',
                         'AgregarTributo', 'AgregarCmpAsoc', 'EstablecerCampoItem',
                         'AgregarDatoAdicional', 'AgregarFormaPago',
@@ -66,7 +66,7 @@ class WSCT(BaseWS):
     # Variables globales para BaseWS:
     HOMO = HOMO
     WSDL = WSDL
-    Version = "%s %s" % (__version__, HOMO and 'Homologaci髇' or '')
+    Version = "%s %s" % (__version__, HOMO and 'Homologaci贸n' or '')
     Reprocesar = True  # recuperar automaticamente CAE emitidos
     LanzarExcepciones = LANZAR_EXCEPCIONES
     factura = None
@@ -116,7 +116,7 @@ class WSCT(BaseWS):
                      **kwargs
                      ):
         "Creo un objeto factura (interna)"
-        # Creo una factura electronica de exportaci髇
+        # Creo una factura electronica de exportaci贸n
         fact = {'tipo_doc': tipo_doc, 'nro_doc': nro_doc,
                 'tipo_cbte': tipo_cbte, 'punto_vta': punto_vta,
                 'cbte_nro': cbte_nro,
@@ -445,7 +445,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarTiposComprobante(self):
-        "Este m閠odo permite consultar los tipos de comprobantes habilitados en este WS"
+        "Este m茅todo permite consultar los tipos de comprobantes habilitados en este WS"
         res = self.client.consultarTiposComprobantes(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -464,7 +464,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarTiposIVA(self):
-        "Este m閠odo permite consultar los tipos de IVA habilitados en este ws"
+        "Este m茅todo permite consultar los tipos de IVA habilitados en este ws"
         res = self.client.consultarTiposIVA(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -474,7 +474,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarCondicionesIVA(self):
-        "Este m閠odo permite consultar los tipos de comprobantes habilitados en este WS"
+        "Este m茅todo permite consultar los tipos de comprobantes habilitados en este WS"
         res = self.client.consultarCondicionesIVA(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -484,7 +484,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarMonedas(self):
-        "Este m閠odo permite consultar los tipos de comprobantes habilitados en este WS"
+        "Este m茅todo permite consultar los tipos de comprobantes habilitados en este WS"
         res = self.client.consultarMonedas(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -494,7 +494,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarTiposItem(self):
-        "Este m閠odo permite consultar los tipos de comprobantes habilitados en este WS"
+        "Este m茅todo permite consultar los tipos de comprobantes habilitados en este WS"
         res = self.client.consultarTiposItem(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -504,7 +504,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarCodigosItemTurismo(self):
-        "Este m閠odo permite consultar los c骴igos de los 韙ems de Turismo"
+        "Este m茅todo permite consultar los c贸digos de los 铆tems de Turismo"
         res = self.client.consultarCodigosItemTurismo(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -514,7 +514,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarTiposTributo(self):
-        "Este m閠odo permite consultar los tipos de comprobantes habilitados en este WS"
+        "Este m茅todo permite consultar los tipos de comprobantes habilitados en este WS"
         res = self.client.consultarTiposTributo(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -524,7 +524,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarCotizacion(self, moneda_id):
-        "Este m閠odo permite consultar los tipos de comprobantes habilitados en este WS"
+        "Este m茅todo permite consultar los tipos de comprobantes habilitados en este WS"
         ret = self.client.consultarCotizacion(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
             codigoMoneda=moneda_id,
@@ -535,7 +535,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarPuntosVenta(self, fmt="%(numeroPuntoVenta)s: bloqueado=%(bloqueado)s baja=%(fechaBaja)s"):
-        "Este m閠odo permite consultar los puntos de venta habilitados para CAE en este WS"
+        "Este m茅todo permite consultar los puntos de venta habilitados para CAE en este WS"
         res = self.client.consultarPuntosVenta(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit},
         )
@@ -550,7 +550,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarPaises(self, sep="|"):
-        "Recuperador de valores referenciales de c骴igos de Pa韘es"
+        "Recuperador de valores referenciales de c贸digos de Pa铆ses"
         ret = self.client.consultarPaises(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit, })
         result = ret['consultarPaisesReturn']
@@ -573,7 +573,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarCUITsPaises(self, sep="|"):
-        "Recuperar lista de valores referenciales de CUIT de Pa韘es"
+        "Recuperar lista de valores referenciales de CUIT de Pa铆ses"
         ret = self.client.consultarCUITsPaises(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit, })
         result = ret['consultarCUITsPaisesReturn']
@@ -596,7 +596,7 @@ class WSCT(BaseWS):
 
     @inicializar_y_capturar_excepciones
     def ConsultarTiposDatosAdicionales(self, sep="|"):
-        "Recuperar lista de los datos adicionales a informar seg鷑 RG."
+        "Recuperar lista de los datos adicionales a informar seg煤n RG."
         ret = self.client.consultarTiposDatosAdicionales(
             authRequest={'token': self.Token, 'sign': self.Sign, 'cuitRepresentada': self.Cuit, })
         result = ret['consultarTiposDatosAdicionalesReturn']
@@ -657,7 +657,7 @@ class WSCT(BaseWS):
 
 
 def main():
-    "Funci髇 principal de pruebas (obtener CAE)"
+    "Funci贸n principal de pruebas (obtener CAE)"
     import os
     import time
 
@@ -703,7 +703,7 @@ def main():
             imp_trib = "1.00"
             imp_op_ex = "0.00"
             imp_subtotal = "100.00"
-            imp_reintegro = -21.00      # validaci髇 AFIP 346
+            imp_reintegro = -21.00      # validaci贸n AFIP 346
             cod_pais = 203
             domicilio = "Rua N.76 km 34.5 Alagoas"
             fecha_cbte = fecha
@@ -730,7 +730,7 @@ def main():
             wsct.AgregarIva(iva_id, base_imp, importe)
 
             tipo = 0    # Item General
-            cod_tur = 1  # Servicio de hoteler韆 - alojamiento sin desayuno
+            cod_tur = 1  # Servicio de hoteler铆a - alojamiento sin desayuno
             codigo = "T0001"
             ds = "Descripcion del producto P0001"
             iva_id = 5
@@ -739,8 +739,8 @@ def main():
             wsct.AgregarItem(tipo, cod_tur, codigo, ds,
                              iva_id, imp_iva, imp_subtotal)
 
-            codigo = 68             # tarjeta de cr閐ito
-            tipo_tarjeta = 99       # otra (ver tabla de par醡etros)
+            codigo = 68             # tarjeta de cr茅dito
+            tipo_tarjeta = 99       # otra (ver tabla de par谩metros)
             numero_tarjeta = "999999"
             swift_code = None
             tipo_cuenta = None
@@ -805,7 +805,7 @@ def main():
         print(wsct.ConsultarCotizacionMoneda('DOL'))
 
 
-# busco el directorio de instalaci髇 (global para que no cambie si usan otra dll)
+# busco el directorio de instalaci贸n (global para que no cambie si usan otra dll)
 INSTALL_DIR = WSCT.InstallDir = get_install_dir()
 
 

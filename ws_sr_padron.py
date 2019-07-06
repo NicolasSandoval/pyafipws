@@ -8,9 +8,9 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 # for more details.
 
-"""Módulo para acceder a los datos de un contribuyente registrado en el Padrón
-de AFIP (WS-SR-PADRON de AFIP). Consulta a Padrón Alcance 4 version 1.1
-Consulta de Padrón Constancia Inscripción Alcance 5 version 2.0
+"""MÃ³dulo para acceder a los datos de un contribuyente registrado en el PadrÃ³n
+de AFIP (WS-SR-PADRON de AFIP). Consulta a PadrÃ³n Alcance 4 version 1.1
+Consulta de PadrÃ³n Constancia InscripciÃ³n Alcance 5 version 2.0
 """
 
 __author__ = "Mariano Reingart <reingart@gmail.com>"
@@ -37,7 +37,7 @@ CONFIG_FILE = "rece.ini"
 
 
 class WSSrPadronA4(BaseWS):
-    "Interfaz para el WebService de Consulta Padrón Contribuyentes Alcance 4"
+    "Interfaz para el WebService de Consulta PadrÃ³n Contribuyentes Alcance 4"
     _public_methods_ = ['Consultar',
                         'AnalizarXml', 'ObtenerTagXml', 'LoadTestXML',
                         'SetParametros', 'SetTicketAcceso', 'GetParametro',
@@ -61,7 +61,7 @@ class WSSrPadronA4(BaseWS):
     # Variables globales para BaseWS:
     HOMO = HOMO
     WSDL = WSDL
-    Version = "%s %s" % (__version__, HOMO and 'Homologación' or '')
+    Version = "%s %s" % (__version__, HOMO and 'HomologaciÃ³n' or '')
     Reprocesar = True  # recuperar automaticamente CAE emitidos
     LanzarExcepciones = LANZAR_EXCEPCIONES
     factura = None
@@ -152,7 +152,7 @@ class WSSrPadronA4(BaseWS):
         return True
 
     def analizar_datos(self, cat_mt):
-        # intenta determinar situación de IVA:
+        # intenta determinar situaciÃ³n de IVA:
         if 32 in self.impuestos:
             self.imp_iva = "EX"
         elif 33 in self.impuestos:
@@ -165,7 +165,7 @@ class WSSrPadronA4(BaseWS):
         self.actividad_monotributo = cat_mt.get("descripcionCategoria") if cat_mt else ""
         self.integrante_soc = ""
         self.empleador = "S" if 301 in self.impuestos else "N"
-        # intenta determinar categoría de IVA (confirmar)
+        # intenta determinar categorÃ­a de IVA (confirmar)
         if self.imp_iva in ('AC', 'S'):
             self.cat_iva = 1  # RI
         elif self.imp_iva == 'EX':
@@ -178,7 +178,7 @@ class WSSrPadronA4(BaseWS):
 
 
 class WSSrPadronA5(WSSrPadronA4):
-    "Interfaz para el WebService de Consulta Padrón Constancia de Inscripción Alcance 5"
+    "Interfaz para el WebService de Consulta PadrÃ³n Constancia de InscripciÃ³n Alcance 5"
 
     _reg_progid_ = "WSSrPadronA5"
     _reg_clsid_ = "{DF7447DD-EEF3-4E6B-A93B-F969B5075EC8}"
@@ -234,7 +234,7 @@ class WSSrPadronA5(WSSrPadronA4):
         self.domicilio = "%s - %s (%s) - %s" % (
             self.direccion, self.localidad,
             self.cod_postal, self.provincia,)
-        # extraer datos impositivos (inscripción / opción) para unificarlos:
+        # extraer datos impositivos (inscripciÃ³n / opciÃ³n) para unificarlos:
         data_mt = ret.get("datosMonotributo", {})
         data_rg = ret.get("datosRegimenGeneral", {})
         # analizo impuestos:
@@ -248,7 +248,7 @@ class WSSrPadronA5(WSSrPadronA4):
 
 
 def main():
-    "Función principal de pruebas (obtener CAE)"
+    "FunciÃ³n principal de pruebas (obtener CAE)"
     import os
     import time
     global CONFIG_FILE
@@ -319,7 +319,7 @@ def main():
                     if e.faultstring != "No existe persona con ese Id":
                         raise
                 print('ok' if ok else "error", padron.Excepcion)
-                # domicilio posiblemente esté en Latin1, normalizar
+                # domicilio posiblemente estÃ© en Latin1, normalizar
                 csv_writer.writerow([norm(getattr(padron, campo, ""))
                                      for campo in columnas])
         sys.exit(0)
@@ -364,7 +364,7 @@ def main():
         print(padron.XmlResponse)
 
 
-# busco el directorio de instalación (global para que no cambie si usan otra dll)
+# busco el directorio de instalaciÃ³n (global para que no cambie si usan otra dll)
 INSTALL_DIR = WSSrPadronA4.InstallDir = WSSrPadronA5.InstallDir = get_install_dir()
 
 
